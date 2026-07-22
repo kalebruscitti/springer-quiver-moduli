@@ -1,0 +1,85 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{ILW20}
+
+\bibitem[Fun03]{Fun03}
+F.Y.C. Fung, \emph{On the topology of components of some {S}pringer fibers and
+  their relation to {K}azhdan-{L}usztig theory}, Adv. Math. \textbf{178}
+  (2003), no.~2, 244--276.
+
+\bibitem[HL14]{HL14}
+A.~Henderson and A.~Licata, \emph{Diagram automorphisms of quiver varieties},
+  Adv. Math. \textbf{267} (2014), 225--276.
+
+\bibitem[ILW19]{ILW19}
+M.S. Im, C.~Lai, and A.~Wilbert, \emph{Irreducible components of two-row
+  {S}pringer fibers and {N}akajima quiver varieties}, unpublished manuscript
+  (2019), arXiv:1910.07411.
+
+\bibitem[ILW20]{ILW20b}
+\bysame, \emph{Irreducible components of two-row springer fibers for all
+  classical types}, arXiv e-prints (2020), arXiv:2011.13138.
+
+\bibitem[KS19]{KS19}
+D.~Kus and B.~Schumann, \emph{{Nakajima quiver varieties, affine crystals and
+  combinatorics of Auslander-Reiten quivers}}, arXiv e-prints (2019),
+  arXiv:1910.07411.
+
+\bibitem[Li19]{Li19}
+Y.~Li, \emph{Quiver varieties and symmetric pairs}, Represent. Theory
+  \textbf{23} (2019), 1--56.
+
+\bibitem[Lus91]{Lu91}
+G.~Lusztig, \emph{Quivers, perverse sheaves, and quantized enveloping
+  algebras}, J. Amer. Math. Soc. \textbf{4} (1991), no.~2, 365--421.
+
+\bibitem[Lus98]{Lu98}
+\bysame, \emph{On quiver varieties}, Adv. Math. \textbf{136} (1998), no.~1,
+  141--182.
+
+\bibitem[Maf05]{Maf05}
+A.~Maffei, \emph{Quiver varieties of type {A}}, Comment. Math. Helv.
+  \textbf{80} (2005), no.~1, 1--27.
+
+\bibitem[Nak94]{Na94}
+H.~Nakajima, \emph{Instantons on {ALE} spaces, quiver varieties, and
+  {K}ac-{M}oody algebras}, Duke Math. J. \textbf{76} (1994), no.~2, 365--416.
+
+\bibitem[Nak98]{Nak98}
+\bysame, \emph{Quiver varieties and {K}ac-{M}oody algebras}, Duke Math. J.
+  \textbf{91} (1998), no.~3, 515--560.
+
+\bibitem[Sai02]{Sai02}
+Y.~Saito, \emph{Crystal bases and quiver varieties}, Math. Ann. \textbf{324}
+  (2002), no.~4, 675--688.
+
+\bibitem[Spa76]{Spa76}
+N.~Spaltenstein, \emph{The fixed point set of a unipotent transformation on the
+  flag manifold}, Nederl. Akad. Wetensch. Proc. Ser. A, vol.~79, 1976,
+  pp.~452--456.
+
+\bibitem[Spr76]{Spr76}
+T.A. Springer, \emph{Trigonometric sums, {G}reen functions of finite groups and
+  representations of {W}eyl groups}, Invent. Math. \textbf{36} (1976),
+  173–--207.
+
+\bibitem[Spr78]{Spr78}
+\bysame, \emph{A construction of representations of {W}eyl groups}, Invent.
+  Math. \textbf{44} (1978), 279--293.
+
+\bibitem[SW12]{SW12}
+C.~Stroppel and B.~Webster, \emph{2-block {S}pringer fibers: convolution
+  algebras and coherent sheaves}, Comment. Math. Helv. \textbf{87} (2012),
+  477--520.
+
+\bibitem[Var79]{Var79}
+J.A. Vargas, \emph{Fixed points under the action of unipotent elements of
+  {SL}$_n$ in the flag variety}, Bol. Soc. Mat. Mexicana \textbf{24} (1979),
+  no.~1, 1--14.
+
+\end{thebibliography}

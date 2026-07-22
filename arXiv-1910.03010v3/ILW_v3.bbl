@@ -1,0 +1,121 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{ES16b}
+
+\bibitem[ES16a]{ES16}
+M.~Ehrig and C.~Stroppel, \emph{2-row {S}pringer fibres and {K}hovanov diagram
+  algebras for type {D}}, Canadian J. Math. \textbf{68} (2016), no.~6,
+  1285--1333.
+
+\bibitem[ES16b]{ES15}
+\bysame, \emph{Diagrammatic description for the categories of perverse sheaves
+  on isotropic {G}rassmannians}, Selecta Math. (N.S.) \textbf{22} (2016),
+  no.~3, 1455–--1536.
+
+\bibitem[Fun03]{Fun03}
+F.Y.C. Fung, \emph{On the topology of components of some {S}pringer fibers and
+  their relation to {K}azhdan-{L}usztig theory}, Adv. Math. \textbf{178}
+  (2003), no.~2, 244--276.
+
+\bibitem[Ger61]{Ger61}
+M.~Gerstenhaber, \emph{Dominance over the classical groups}, Ann. of Math.
+  \textbf{74} (1961), no.~3, 532--569.
+
+\bibitem[HL14]{HL14}
+A.~Henderson and A.~Licata, \emph{Diagram automorphisms of quiver varieties},
+  Adv. Math. \textbf{267} (2014), 225--276.
+
+\bibitem[KS19]{KS19}
+D.~Kus and B.~Schumann, \emph{{Nakajima quiver varieties, affine crystals and
+  combinatorics of Auslander-Reiten quivers}}, arXiv e-prints (2019),
+  arXiv:1910.07411.
+
+\bibitem[Li19]{Li19}
+Y.~Li, \emph{Quiver varieties and symmetric pairs}, Represent. Theory
+  \textbf{23} (2019), 1--56.
+
+\bibitem[LS13]{LS13}
+T.~Lejczyk and C.~Stroppel, \emph{A graphical description of {$(D_n,A_{n-1})$}
+  {K}azhdan-{L}usztig polynomials}, Glasgow Math. J. \textbf{55} (2013), no.~2,
+  313--340.
+
+\bibitem[Lus91]{Lu91}
+G.~Lusztig, \emph{Quivers, perverse sheaves, and quantized enveloping
+  algebras}, J. Amer. Math. Soc. \textbf{4} (1991), no.~2, 365--421.
+
+\bibitem[Lus93]{L93}
+\bysame, \emph{Introduction to quantum groups}, Progress in Mathematics, vol.
+  110, Birkh\"{a}user Boston, Inc., Boston, MA, 1993.
+
+\bibitem[Lus98]{Lu98}
+\bysame, \emph{On quiver varieties}, Adv. Math. \textbf{136} (1998), no.~1,
+  141--182.
+
+\bibitem[Maf05]{Maf05}
+A.~Maffei, \emph{Quiver varieties of type {A}}, Comment. Math. Helv.
+  \textbf{80} (2005), no.~1, 1--27.
+
+\bibitem[Nak94]{Na94}
+H.~Nakajima, \emph{Instantons on {ALE} spaces, quiver varieties, and
+  {K}ac-{M}oody algebras}, Duke Math. J. \textbf{76} (1994), no.~2, 365--416.
+
+\bibitem[Nak98]{Nak98}
+\bysame, \emph{Quiver varieties and {K}ac-{M}oody algebras}, Duke Math. J.
+  \textbf{91} (1998), no.~3, 515--560.
+
+\bibitem[Sai02]{Sai02}
+Y.~Saito, \emph{Crystal bases and quiver varieties}, Math. Ann. \textbf{324}
+  (2002), no.~4, 675--688.
+
+\bibitem[Sch12]{S12}
+G.~Schafer, \emph{A graphical calculus for 2-block spaltenstein varieties},
+  Glasg. Math. J. \textbf{54} (2012), no.~2, 449–477.
+
+\bibitem[Spa76]{Spa76}
+N.~Spaltenstein, \emph{The fixed point set of a unipotent transformation on the
+  flag manifold}, Nederl. Akad. Wetensch. Proc. Ser. A, vol.~79, 1976,
+  pp.~452--456.
+
+\bibitem[Spa82]{Spa82}
+\bysame, \emph{Classes {U}nipotentes et {S}ous-groupes de {B}orel}, Lecture
+  Notes in Mathematics, vol. 946, Springer-Verlag, 1982.
+
+\bibitem[Spr76]{Spr76}
+T.~A. Springer, \emph{Trigonometric sums, {G}reen functions of finite groups
+  and representations of {W}eyl groups}, Invent. Math. \textbf{36} (1976),
+  173–--207.
+
+\bibitem[Spr78]{Spr78}
+\bysame, \emph{A construction of representations of {W}eyl groups}, Invent.
+  Math. \textbf{44} (1978), 279--293.
+
+\bibitem[SW12]{SW12}
+C.~Stroppel and B.~Webster, \emph{2-block {S}pringer fibers: convolution
+  algebras and coherent sheaves}, Comment. Math. Helv. \textbf{87} (2012),
+  477--520.
+
+\bibitem[Var79]{Var79}
+J.A. Vargas, \emph{Fixed points under the action of unipotent elements of
+  {SL}$_n$ in the flag variety}, Bol. Soc. Mat. Mexicana \textbf{24} (1979),
+  no.~1, 1--14.
+
+\bibitem[vL89]{vL89}
+M.~van Leeuwen, \emph{A {R}obinson-{S}chensted algorithm in the geometry of
+  flags for classical groups}, Ph{D} thesis, Rijksuniversiteit Utrecht, 1989.
+
+\bibitem[Wil37]{Wi37}
+J.~Williamson, \emph{The {C}onjunctive {E}quivalence of {P}encils of
+  {H}ermitian and {A}nti-{H}ermitian {M}atrices}, Amer. J. Math. \textbf{59}
+  (1937), no.~2, 399--413.
+
+\bibitem[Wil18]{Wil18}
+A.~Wilbert, \emph{Topology of two-row {S}pringer fibers for the even orthogonal
+  and symplectic group}, Trans. Amer. Math. Soc. \textbf{370} (2018),
+  2707--2737.
+
+\end{thebibliography}
