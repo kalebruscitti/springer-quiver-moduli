@@ -30,6 +30,7 @@ maps `A_i:V_i→V_{i+1}`, `B_i:V_{i+1}→V_i`, `Γ_j:D_j→V_j`, `Δ_j:V_j→D_j
 | components ↔ cup diagrams | `defi:…comp…` | `cup_diagrams(n,k)` |
 | cup relation `ker B_{s→i-1}=ker A_{s→j}` | `defi:…comp…` | `cup_relations(rep,D)` |
 | ray relation `B_iA_i=0` / `Γ_{n-k→i}=0` | `prop:ray` | `ray_relations(rep,D)` |
+| component ideal / coordinate ring | — | `component_ideal`, `component_coordinate_ring` |
 | `GL(V)` action | `def:GL action` | `act(g,rep)` |
 
 **Stability is an open condition.** `M_i = [A_{i-1} | Γ_{j→i} (j≥i)]` must have full
@@ -64,6 +65,27 @@ end
 Build a concrete point and test membership with `numeric_rep` + `in_component`
 (defaults `Δ=0`); see `test/runtests.jl` for the paper's `(2,2)` and `(3,1)` points.
 
+### Coordinate ring of a component (for Oscar)
+
+```julia
+Q, proj = component_coordinate_ring(rep, D)   # D a cup diagram
+krull_dim(Q)                                  # dimension of the component locus
+I = component_ideal(rep, D)
+is_prime(I)                                   # irreducibility
+```
+
+`component_ideal(rep, D)` returns the ideal in `rep.R` cutting out (the closure
+of) the stable component locus `Λ^a`: admissible (`eq:L1`), `Δ=0`, ray relations,
+and the cup relations `ker M = ker N`. Because a cup relation is a **kernel
+equality**, not a vanishing condition, each inclusion is encoded with an
+auxiliary matrix (`ker M ⊆ ker N ⟺ ∃C: N = CM`) and those variables are then
+**eliminated**, so the result lives in the original representation coordinates.
+**Stability** is an open condition, imposed by **saturating** against the maximal
+minors of each `M_i` (removing unstable components). Keywords:
+`delta_zero`, `include_rays`, `saturate_stability` (set the last to `false` for a
+much cheaper, unsaturated ideal). E.g. for `(3,1)` the component `cup (2,3)`
+comes out as the prime ideal `(Δ, B_1, A_2)`, `krull_dim = 4` (dim 1 modulo `GL(V)`).
+
 Pretty-print everything for a shape:
 
 ```
@@ -77,7 +99,7 @@ src/TwoRowSpringer.jl   module + exports
 src/quiver.jl           QuiverData, dimension vectors (eq:2rowdv)
 src/representation.jl   Rep; symbolic_rep, numeric_rep
 src/equations.jl        composites, adhm_ideal, stability_data (eq:L1, eq:L2)
-src/springer.jl         Δ=0, cup_diagrams, cup/ray relations
+src/springer.jl         Δ=0, cup_diagrams, cup/ray relations, component_ideal
 src/gauge.jl            GL(V) action
 test/runtests.jl        verified against the paper's (2,2) & (3,1) examples
 demo.jl                 CLI pretty-printer

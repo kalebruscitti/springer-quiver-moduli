@@ -101,6 +101,32 @@ end
 # ---------------------------------------------------------------------------
 
 """
+    point_hom(sym, num; base = num.R)
+
+Ring homomorphism `sym.R → base` sending each indeterminate of the symbolic
+representation `sym` to its value in the numeric representation `num` (built for
+the same `QuiverData`). Use it to evaluate any symbolic ideal / polynomial at a
+concrete point, e.g. `all(iszero, phi.(gens(I)))`.
+"""
+function point_hom(sym::Rep, num::Rep; base = num.R)
+    R = sym.R
+    vals = elem_type(base)[]
+    for g in gens(R)
+        m = match(r"^([A-Z])(\d+)_(\d+)_(\d+)$", string(g))
+        m === nothing && error("cannot parse variable name $(string(g))")
+        p = m.captures[1][1]
+        i = parse(Int, m.captures[2])
+        a = parse(Int, m.captures[3])
+        b = parse(Int, m.captures[4])
+        M = p == 'A' ? getA(num, i) :
+            p == 'B' ? getB(num, i) :
+            p == 'G' ? getGamma(num, i) : getDelta(num, i)
+        push!(vals, base(M[a, b]))
+    end
+    return hom(R, base, vals)
+end
+
+"""
     numeric_rep(qd; A, B, Gamma, Delta = nothing, base = QQ) -> Rep
 
 Build a representation from explicit matrices. `A`, `B`, `Gamma`, `Delta` are

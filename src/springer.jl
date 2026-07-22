@@ -138,3 +138,118 @@ function in_component(rep::Rep, diagram)
     is_admissible(rep) && is_stable(rep) &&
         satisfies_cups(rep, diagram) && satisfies_rays(rep, diagram)
 end
+
+# ---------------------------------------------------------------------------
+# The defining ideal / coordinate ring of a component locus, for Oscar.
+#
+# The locus is  { admissible (eq:L1),  Δ = 0,  ray relations,  ker M = ker N
+#                 for every cup,  stable (eq:L2) }  ⊆ R(d,v).
+#
+# A cup relation `ker M = ker N` is not a set of vanishing polynomials directly;
+# it is the double row-space inclusion, encoded with auxiliary matrices
+#     N = C·M   (⟺ ker M ⊆ ker N)   and   M = D·N   (⟺ ker N ⊆ ker M),
+# whose variables are then eliminated. Stability is the open condition "not all
+# maximal minors of each M_i vanish", imposed by saturating against those minors.
+# ---------------------------------------------------------------------------
+
+"""
+    component_ideal(rep, diagram;
+                    delta_zero = true, include_rays = true, saturate_stability = true)
+
+Ideal in `rep.R` cutting out (the Zariski closure of) the stable component locus
+`Λ^a` for `diagram`. Built from a **symbolic** `Rep`.
+
+- `delta_zero`         : impose `Δ = 0` (the Springer fibre, prop:Spr).
+- `include_rays`       : add the ray relations (prop:ray; implied on the stable
+                         locus, but they sharpen the ideal before saturation).
+- `saturate_stability` : saturate against the stability minors so that
+                         unstable components are removed (eq:L2). Set `false` to
+                         keep the raw (unsaturated) ideal — much cheaper.
+
+Cup relations are encoded with auxiliary matrices that are then eliminated, so
+the result lives in the original representation coordinates and can be handed to
+Oscar (`dim`, `is_prime`, `radical`, Hilbert series, …).
+"""
+function component_ideal(rep::Rep, diagram;
+                         delta_zero::Bool = true,
+                         include_rays::Bool = true,
+                         saturate_stability::Bool = true)
+    R = rep.R
+    base = base_ring(R)
+    srep = delta_zero ? springer_restrict(rep) : rep
+    cups = cup_relations(rep, diagram)
+
+    # auxiliary variables: C_ci (b×a) and D_ci (a×b) for each cup with a,b > 0
+    auxnames = String[]
+    for (ci, r) in enumerate(cups)
+        a, b = nrows(r.M), nrows(r.N)
+        if a > 0 && b > 0
+            append!(auxnames, ["cC$(ci)_$(x)_$(y)" for x in 1:b for y in 1:a])
+            append!(auxnames, ["cD$(ci)_$(x)_$(y)" for x in 1:a for y in 1:b])
+        end
+    end
+
+    orignames = string.(gens(R))
+    Rext, extg = polynomial_ring(base, vcat(orignames, auxnames))
+    phi = hom(R, Rext, extg[1:ngens(R)])
+    pushcol(gs, M) = for x in 1:nrows(M), y in 1:ncols(M); push!(gs, M[x, y]); end
+
+    gs = elem_type(Rext)[]
+    for Mres in adhm_residuals(srep)                 # admissibility (eq:L1)
+        pushcol(gs, map_entries(phi, Mres))
+    end
+    if delta_zero                                    # Δ = 0
+        for j in rep.qd.framing
+            pushcol(gs, map_entries(phi, getDelta(rep, j)))
+        end
+    end
+    if include_rays                                  # ray relations (prop:ray)
+        for g in ray_ideal_gens(srep, diagram)
+            push!(gs, phi(g))
+        end
+    end
+
+    off = ngens(R)                                   # cup relations (kernel equality)
+    for (ci, r) in enumerate(cups)
+        a, b = nrows(r.M), nrows(r.N)
+        Mext, Next = map_entries(phi, r.M), map_entries(phi, r.N)
+        if a > 0 && b > 0
+            C = matrix(Rext, b, a, [extg[off + (x-1)*a + y] for x in 1:b for y in 1:a]); off += a*b
+            D = matrix(Rext, a, b, [extg[off + (x-1)*b + y] for x in 1:a for y in 1:b]); off += a*b
+            pushcol(gs, Next - C * Mext)             # N = C M  ⟺ ker M ⊆ ker N
+            pushcol(gs, Mext - D * Next)             # M = D N  ⟺ ker N ⊆ ker M
+        elseif a == 0 && b > 0
+            pushcol(gs, Next)                        # ker M = V_s ⇒ N = 0
+        elseif b == 0 && a > 0
+            pushcol(gs, Mext)                        # ker N = V_s ⇒ M = 0
+        end
+    end
+
+    Iext = ideal(Rext, gs)
+    auxvars = extg[(ngens(R)+1):end]
+    Iel = isempty(auxvars) ? Iext : eliminate(Iext, auxvars)
+
+    psi = hom(Rext, R, vcat(gens(R), fill(R(0), length(auxnames))))
+    IR = ideal(R, [psi(g) for g in gens(Iel)])
+
+    if saturate_stability
+        for i in 1:(rep.qd.n - 1)
+            mins = stability_minors(rep, i)
+            isempty(mins) && continue
+            IR = saturation(IR, ideal(R, mins))
+        end
+    end
+    return IR
+end
+
+"""
+    component_coordinate_ring(rep, diagram; kwargs...) -> (Q, proj)
+
+The coordinate ring `Q = rep.R / component_ideal(rep, diagram; …)` as an Oscar
+quotient ring, together with the projection. Pass to Oscar to check properties,
+e.g. `krull_dim(Q)`, `is_prime(modulus(Q))`. Keyword arguments are forwarded to
+[`component_ideal`](@ref).
+"""
+function component_coordinate_ring(rep::Rep, diagram; kwargs...)
+    return quo(rep.R, component_ideal(rep, diagram; kwargs...))
+end

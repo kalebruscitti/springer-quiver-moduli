@@ -24,13 +24,14 @@ include("springer.jl")
 include("gauge.jl")
 
 export QuiverData, dimV, dimD, getV
-export Rep, symbolic_rep, numeric_rep, getA, getB, getGamma, getDelta
+export Rep, symbolic_rep, numeric_rep, point_hom, getA, getB, getGamma, getDelta
 export A_comp, B_comp, composite_Gamma
 export adhm_residuals, adhm_ideal, is_admissible
 export stability_matrix, stability_minors, stability_data,
        is_stable, in_stable_locus
 export springer_restrict, cup_diagrams, cup_relations, ray_relations,
-       ray_ideal_gens, satisfies_cups, satisfies_rays, in_component
+       ray_ideal_gens, satisfies_cups, satisfies_rays, in_component,
+       component_ideal, component_coordinate_ring
 export act
 
 end # module

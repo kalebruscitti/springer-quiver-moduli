@@ -89,3 +89,36 @@ end
     d_nested = first(filter(D -> (1, 4) in D.cups, cup_diagrams(4, 2)))
     @test in_component(rep2, d_nested)   # component membership is gauge-invariant
 end
+
+@testset "component ideal / coordinate ring (3,1)" begin
+    qd = QuiverData(4, 1)
+    rep = symbolic_rep(qd)
+    diags = cup_diagrams(4, 1)
+    num = numeric_rep(qd;
+        A = Dict(1 => m11(1), 2 => m11(0)),
+        B = Dict(1 => m11(0), 2 => m11(1)),
+        Gamma = Dict(1 => m11(1), 3 => m11(1)))
+    phi = point_hom(rep, num)
+
+    ideals = [component_ideal(rep, D) for D in diags]
+    # the paper point lies on exactly one component
+    @test count(I -> all(iszero, phi.(gens(I))), ideals) == 1
+
+    a2 = findfirst(D -> (2, 3) in D.cups, diags)
+    I2 = ideals[a2]
+    @test all(iszero, phi.(gens(I2)))         # point is on component a2
+    @test is_prime(I2)                         # component is irreducible
+    Q, _ = quo(rep.R, I2)
+    @test krull_dim(Q) == 4                    # dim 1 modulo GL(V) = GL_1^3
+    @test rep.B[1][1, 1] in I2                 # ker B_1 = ker A_2 ⇒ B_1 = A_2 = 0 here
+    @test rep.A[2][1, 1] in I2
+end
+
+@testset "component ideal / coordinate ring (2,2)" begin
+    qd = QuiverData(4, 2)
+    rep = symbolic_rep(qd)
+    D = first(cup_diagrams(4, 2))
+    I = component_ideal(rep, D)
+    @test is_prime(I)                          # irreducible component
+    @test krull_dim(quo(rep.R, I)[1]) == 8     # dim 2 modulo GL(V), dim 6
+end
